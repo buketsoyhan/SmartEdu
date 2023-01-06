@@ -21,6 +21,24 @@ app.get("/about", (req, res) => {
   });
 });
 
+app.get("/courses", (req, res) => {
+  res.status(200).render("courses", {
+    page_name: "courses",
+  });
+});
+
+app.get("/dashboard", (req, res) => {
+  res.status(200).render("dashboard", {
+    page_name: "dashboard",
+  });
+});
+
+app.get("/contact", (req, res) => {
+  res.status(200).render("contact", {
+    page_name: "contact",
+  });
+});
+
 app.get("*", (req, res) => {
   res.status(404).send("404 Page Not Found");
 });
