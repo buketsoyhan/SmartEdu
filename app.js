@@ -8,7 +8,10 @@ const port = 3000;
 
 //DB bağlantısı
 mongoose
-  .connect("mongodb://localhost/smartedu-db")
+  .connect("mongodb://localhost/smartedu-db", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("DB connected successfully");
   })
@@ -23,6 +26,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
+
 //Router dosyasında gerekli yönlendirmeler eklendi.
 app.use("/", pageRoute);
 app.use("/courses", courseRoute);
