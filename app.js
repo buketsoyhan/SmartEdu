@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require('path')
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
 
@@ -21,7 +22,7 @@ mongoose
 
 //EJS template engine kullanılcağı belirtildi.
 app.set("view engine", "ejs");
-
+app.set('views', path.join(__dirname, 'views'));
 //Middlewares -Statik dosyaların nerde olduğu gösterildi.
 app.use(express.static("public"));
 app.use(express.json());
