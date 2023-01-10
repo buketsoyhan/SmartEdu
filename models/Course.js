@@ -13,13 +13,17 @@ const CourseSchema = new Schema({
     required: true,
     trim: true,
   },
-  createdAt: {
+  createDate: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   slug: {
     type: String,
     unique: true,
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
   },
 });
 

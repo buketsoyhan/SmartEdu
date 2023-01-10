@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require('path')
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
+const categoryRoute = require("./routes/categoryRoute");
 
 const app = express();
 const port = 3000;
@@ -31,6 +32,7 @@ app.use(express.urlencoded({extended:true}))
 //Router dosyasında gerekli yönlendirmeler eklendi.
 app.use("/", pageRoute);
 app.use("/courses", courseRoute);
+app.use("/categories", categoryRoute);
 
 app.listen(port, () => {
   console.log(`App started on port ${port}`);
