@@ -33,3 +33,8 @@ exports.loginUser = async (req, res) => {
     });
   } catch (error) {}
 };
+exports.logoutUser=(req,res)=>{
+  req.session.destroy(()=>{
+    res.redirect('/')
+  })
+}
