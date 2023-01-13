@@ -36,7 +36,7 @@
                 <div class="course-meta-bot">
                   <ul>
                     <li>
-                      <i class="fa fa-user" aria-hidden="true"></i>Go to Course
+                      <i class="fa fa-user" aria-hidden="true"></i><%= courses[i].user.name %>
                     </li>
                   </ul>
                 </div>
@@ -58,7 +58,7 @@
                   class="input-text form-control"
                   name="search"
                   id="search-k"
-                  placeholder="Arama..."
+                  placeholder="Search..."
                   type="text"
                 />
                 <button id="searchsubmit" value="Search" type="submit"></button>
