@@ -32,7 +32,8 @@ exports.getLoginPage = (req, res) => {
 };
 
 exports.sendEmail = async (req, res) => {
-  const outputMessage = `
+  try {
+    const outputMessage = `
   <h1>Message Details</h1>
   <ul>
   <li>Name: ${req.body.name}</li>
@@ -42,29 +43,35 @@ exports.sendEmail = async (req, res) => {
   <p>${req.body.message}</p>
   `;
 
-  let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-      user: "buketsoyhann@gmail.com", // gmail hesabı
-      pass: "ahfpaeqawzunpmpi", // gmail şifresi veya uygulama şifresi
-    },
-  });
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: "buketsoyhann@gmail.com", // gmail hesabı
+        pass: "ahfpaeqawzunpmpi", // gmail şifresi veya uygulama şifresi
+      },
+    });
 
-  let info = await transporter.sendMail({
-    from: '"Smart EDU Contact Form" <buketsoyhann@gmail.com>', // sender address
-    to: "buketsoyhan1998@outlook.com", // list of receivers
-    subject: "Smart EDU Contact Form New Message ✔", // Subject line
-    html: outputMessage, // html body
-  });
+    let info = await transporter.sendMail({
+      from: '"Smart EDU Contact Form" <buketsoyhann@gmail.com>', // sender address
+      to: "buketsoyhan1998@outlook.com", // list of receivers
+      subject: "Smart EDU Contact Form New Message ✔", // Subject line
+      html: outputMessage, // html body
+    });
 
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
-  res.status(200).redirect("contact");
+    req.flash("success", "We receiver your message succesfully");
+
+    res.status(200).redirect("contact");
+  } catch (err) {
+    req.flash("error", `Something happened!`);
+    res.status(200).redirect("contact");
+  }
 };
