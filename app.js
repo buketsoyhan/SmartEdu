@@ -11,19 +11,22 @@ const categoryRoute = require("./routes/categoryRoute");
 const userRoute = require("./routes/userRoute");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 5000;
 
 //DB bağlantısı
 mongoose
-  .connect("mongodb://localhost/smartedu-db", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://buketsoyhan:Zr0cum37DwQcLCSk@buketsoyhan.05fmo.mongodb.net/smartedu-db?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
-    console.log("DB connected successfully");
+    console.log("DB CONNECTED!");
   })
-  .catch((error) => {
-    console.error("Connect failure");
+  .catch((err) => {
+    console.log(err);
   });
 
 //EJS template engine kullanılcağı belirtildi.
